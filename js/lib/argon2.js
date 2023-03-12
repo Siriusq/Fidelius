@@ -69,7 +69,7 @@
       return global.loadArgon2WasmModule();
     }
     if (typeof require === 'function') {
-      return Promise.resolve(require('../dist/argon2.js'));
+      return Promise.resolve(require('../js/dist/argon2.js'));
     }
     return import('../dist/argon2.js');
   }
@@ -79,7 +79,7 @@
       return global.loadArgon2WasmBinary();
     }
     if (typeof require === 'function') {
-      return Promise.resolve(require('../dist/argon2.wasm')).then(
+      return Promise.resolve(require('../js/dist/argon2.wasm')).then(
         (wasmModule) => {
           return decodeWasmBinary(wasmModule);
         }
@@ -87,7 +87,7 @@
     }
     const wasmPath =
       global.argon2WasmPath ||
-      '/js/dist/argon2.wasm';
+      '/Fidelius/js/dist/argon2.wasm';
     return fetch(wasmPath)
       .then((response) => response.arrayBuffer())
       .then((ab) => new Uint8Array(ab));
