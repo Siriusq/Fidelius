@@ -84,9 +84,9 @@
                             <div class="input-group mb-2">
                                 <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
                                     data-bs-trigger="focus" data-bs-placement="left"
-                                    data-bs-content="最终生成的密码的长度，默认为16位，建议不少于8位">密码长度</a>
+                                    data-bs-content="最终生成的密码的长度，默认为16位，建议不少于8位，最小为6位">密码长度</a>
                                 <input type="number" class="form-control" id="pwdLength" placeholder="例：16" value=""
-                                    max="60" min="8">
+                                    max="60" min="6">
                             </div>
                         </div>
 
@@ -195,21 +195,27 @@
                                     以下为 Argon2 推荐加密参数，如无特殊需要请保持默认
                                     <!--迭代次数-->
                                     <div class="input-group mb-2 mt-2">
-                                        <span class="input-group-text">迭代次数</span>
+                                        <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
+                                            data-bs-trigger="focus" data-bs-placement="left"
+                                            data-bs-content="哈希运算的迭代次数，它必须是一个从 1 到 2^(32)-1 的整数值。若此处输入值小于1，将采用默认值计算">迭代次数</a>
                                         <input type="number" class="form-control" id="iteration" placeholder="3"
                                             value="" min="1">
                                     </div>
 
                                     <!--并行数量-->
                                     <div class="input-group mb-2">
-                                        <span class="input-group-text">并行数量</span>
+                                        <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
+                                            data-bs-trigger="focus" data-bs-placement="left"
+                                            data-bs-content="并行数量决定了可以运行多少个独立的但同步的计算链。它必须是一个从 1 到 2^(24)-1 的整数值。若此处输入值小于1，将采用默认值计算">并行数量</a>
                                         <input type="number" class="form-control" id="parallelism" placeholder="1"
                                             value="" min="1">
                                     </div>
 
                                     <!--内存用量，单位KB-->
                                     <div class="input-group mb-2">
-                                        <span class="input-group-text">内存用量</span>
+                                        <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
+                                            data-bs-trigger="focus" data-bs-placement="left"
+                                            data-bs-content="内存大小必须是一个整数，取值范围为 8*并行数 到 2^(32)-1 KB。实际用量为输入值四舍五入到 4*并行数 的最近倍数。若此处输入值小于8*并行数，将采用默认值计算">内存用量</a>
                                         <input type="number" class="form-control" id="memoryUsage" placeholder="65536"
                                             value="" min="8">
                                         <span class="input-group-text">KB</span>
@@ -217,9 +223,11 @@
 
                                     <!--输出散列长度-->
                                     <div class="input-group">
-                                        <span class="input-group-text">散列长度</span>
+                                        <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
+                                            data-bs-trigger="focus" data-bs-placement="left"
+                                            data-bs-content="散列长度必须是一个从 4 到 2^(32)-1 的整数字节，需大于等于密码长度">散列长度</a>
                                         <input type="number" class="form-control" id="hashLength" placeholder="64"
-                                            value="" min="8">
+                                            value="" min="4">
                                         <span class="input-group-text">Byte</span>
                                     </div>
 
@@ -300,7 +308,7 @@
         <div class="row justify-content-center">
             <div class="input-field col-12 col-sm-12 col-md-8 col-lg-6">
                 <span class="badge bg-secondary float-end"><a href="https://siriusq.top/">Back to siriusq.top</a></span>
-                <span class="badge bg-info">Open source on <a href="https://siriusq.top/">Github</a></span>
+                <span class="badge bg-info">Open source on <a href="https://github.com/Siriusq/Fidelius">Github</a></span>
             </div>
         </div>
     </div>

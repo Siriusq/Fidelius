@@ -1,7 +1,7 @@
 importScripts('./lib/argon2.min.js');
 
 var res;
-onmessage = function(event){
+onmessage = function (event) {
     var memoryCodeValue = event.data[0];
     var saltValue = event.data[1];
     var hashLenValue = event.data[2];
@@ -12,6 +12,13 @@ onmessage = function(event){
     var containSymbolsValue = event.data[7];
     var containUppercaseValue = event.data[8];
     var punctuation = event.data[9];
+
+    //参数校验
+    if (pwdLengthValue && pwdLengthValue < 6) pwdLengthValue = 6;
+    if (hashLenValue && hashLenValue < (pwdLengthValue || 8)) hashLenValue = "";
+    if (iterationValue && iterationValue < 1) iterationValue = "";
+    if (memoryUsageValue && memoryUsageValue < 8 * (parallelismValue || 1)) memoryUsageValue = "";
+    if (parallelismValue && parallelismValue < 1) parallelismValue = "";
 
     argon2.hash({
         pass: memoryCodeValue,
@@ -25,7 +32,7 @@ onmessage = function(event){
         .then(function (h) {
             var hashRes = h.hashHex;
             var pwdOutputLength = pwdLengthValue || 16;
-            var res = seekPassword(hashRes, pwdOutputLength, containSymbolsValue, containUppercaseValue,punctuation);
+            var res = seekPassword(hashRes, pwdOutputLength, containSymbolsValue, containUppercaseValue, punctuation);
             this.postMessage(res);
         })
         .catch(e => {
