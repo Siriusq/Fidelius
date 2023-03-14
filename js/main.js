@@ -39,6 +39,7 @@
 })();
 
 //点击按钮生成密码
+var argonWorker;
 document.getElementById("generatePwd").onclick = function () {
     var memoryCodeEl = document.getElementById("memoryCode");
     var distinguishMarkEl = document.getElementById("distinguishMark");
@@ -90,8 +91,11 @@ document.getElementById("generatePwd").onclick = function () {
     document.getElementById("pwdOutput").setAttribute("type", "password");
     document.getElementById("showOrHidePwd").innerText = "显示";
 
-    //单独开线程运算Argon2
-    var argonWorker = new Worker('./js/fidelius.min.js');
+    //多线程运算Argon2，避免UI渲染被阻塞
+    if (!argonWorker){
+        argonWorker = new Worker('./js/fidelius.min.js');
+    }
+    
     argonWorker.postMessage(
         [memoryCodeEl.value,
         distinguishMarkValue + generateTimeValue,
