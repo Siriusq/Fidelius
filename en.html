@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Fidelius · Password generator">
     <meta name="author" content="Sirius">
-    <title>Fidelius · 密码生成器</title>
+    <title>Fidelius · Password generator</title>
     <!--Icon Source: https://www.flaticon.com/free-icon/padlock_7718913?term=password&page=3&position=20&origin=search&related_id=7718913-->
     <link rel="shortcut icon" href="favicon.ico">
-    <!--CSS File Source: https://bootswatch.com/quartz/-->
+    <!--CSS File Source:https://bootswatch.com/quartz/-->
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" media="screen, projection">
     <link type="text/css" rel="stylesheet" href="css/loading.min.css">
 </head>
@@ -32,93 +32,92 @@
                     </h1>
                 </div>
 
-                <!--弹窗-->
+                <!--Alert-->
                 <div class="alert alert-warning" role="alert">
-                    说明：密码生成使用 <a href="https://en.wikipedia.org/wiki/Argon2">Argon2</a>
-                    算法，所有运算均在本地进行。点击每个输入框前的按钮可查看详细说明，点击按钮外任意区域可关闭说明。密码生成时间取决于设备性能，生成过程中网页可能会无响应，请耐心等待
+                    NOTE: The <a href="https://en.wikipedia.org/wiki/Argon2">Argon2</a> algorithm is used in password generation and all operations are performed locally. Click on the button in front of each input box to view detailed instructions, then click on any area outside the button to close the instructions. Password generation time depends on device performance and the page may be unresponsive during the generation process, please be patient.
                 </div>
 
                 <form>
-                    <!--主密码-->
+                    <!--Main Password-->
                     <div class="input-group mb-2">
                         <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
                             data-bs-trigger="focus" data-bs-placement="left"
-                            data-bs-content="唯一需要记住的密码，其他密码基于此密码生成，不建议包含个人信息（如生日、姓名），长度最少为8位">记忆密码</a>
-                        <input type="password" class="form-control" id="memoryCode" placeholder="例：M3m0RyC@de!" value=""
+                            data-bs-content="The only password that needs to be remembered, other passwords are generated based on this password, it is not recommended to include personal information (e.g. birthday, name) in this password, minimum length is 8 digits">Main Pwd</a>
+                        <input type="password" class="form-control" id="memoryCode" placeholder="e.g. M3m0RyC@de!" value=""
                             onkeyup="">
                     </div>
 
-                    <!--区分标识/域名哈希盐-->
+                    <!--Distinguish marks/domain hash salts-->
                     <div class="input-group mb-2">
                         <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
                             data-bs-trigger="focus" data-bs-placement="left"
-                            data-bs-content="哈希盐的组成部分，可以使用网站域名，如知乎使用zhihu.com">区分标识</a>
-                        <input type="text" class="form-control" id="distinguishMark" placeholder="例：zhihu.com" value="">
+                            data-bs-content="Part of the hash salt, can use website domain names, e.g. Twitter can use twitter.com">Unique ID</a>
+                        <input type="text" class="form-control" id="distinguishMark" placeholder="e.g. twitter.com" value="">
                     </div>
 
                     <div class="row align-items-center">
-                        <!--密码创建年月-->
+                        <!--Generate time-->
                         <div class="col-8 col-md-9">
                             <div class="input-group mb-2">
                                 <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
                                     data-bs-trigger="focus" data-bs-placement="left"
-                                    data-bs-content="哈希盐的组成部分，用于定期修改密码，在2023年生成的密码可填写2023，非必填">生成时间</a>
-                                <input type="text" class="form-control" id="generateTime" placeholder="例：2023年"
+                                    data-bs-content="Part of the hash salt, for periodic password changes, e.g. a password generated in 2023 could be filled in with 2023, not required">Gen Date&nbsp;</a>
+                                <input type="text" class="form-control" id="generateTime" placeholder="e.g. 2023"
                                     value="">
                             </div>
                         </div>
 
-                        <!--是否包含特殊符号-->
+                        <!--Contain symbols-->
                         <div class="col-4 col-md-3">
                             <div class="input-group mb-2">
                                 <div class="form-check form-switch mx-auto">
                                     <input class="form-check-input" type="checkbox" id="containSymbols" checked>
-                                    <label class="form-check-label text-nowrap" for="containSymbols">特殊符号</label>
+                                    <label class="form-check-label text-nowrap" for="containSymbols">Symbols</label>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="row align-items-center">
-                        <!--密码长度-->
+                        <!--Password length-->
                         <div class="col-8 col-md-9">
                             <div class="input-group mb-2">
                                 <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
                                     data-bs-trigger="focus" data-bs-placement="left"
-                                    data-bs-content="最终生成的密码的长度，默认为16位，建议不少于8位，最小为6位">密码长度</a>
-                                <input type="number" class="form-control" id="pwdLength" placeholder="例：16" value=""
+                                    data-bs-content="The length of the generated password, the default value is 16 digits, we recommend no less than 8 digits and a minimum of 6 digits">Length &nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                <input type="number" class="form-control" id="pwdLength" placeholder="e.g. 16" value=""
                                     max="60" min="6">
                             </div>
                         </div>
 
-                        <!--是否包含大写字母-->
+                        <!--Uppercase-->
                         <div class="col-4 col-md-3">
                             <div class="input-group mb-2">
                                 <div class="form-check form-switch mx-auto">
                                     <input class="form-check-input" type="checkbox" id="containUppercase" checked>
-                                    <label class="form-check-label text-nowrap" for="containUppercase">大写字母</label>
+                                    <label class="form-check-label text-nowrap" for="containUppercase">Capitals</label>
                                 </div>
                             </div>
                         </div>
                     </div>
 
 
-                    <!--自定义参数-->
+                    <!--Customized parameters-->
                     <div class="accordion" id="advancedSettings">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    高级设置
+                                    Advanced settings
                                 </button>
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                                 data-bs-parent="#advancedSettings">
                                 <div class="accordion-body">
-                                    <h6>以下为自定义设置，如无特殊需要请跳过</h6>
+                                    <h6>The following are custom settings, please ignore if you do not need to adjust them.</h6>
 
-                                    <!--特殊符号复选框-->
-                                    自选特殊符号（仅用于对特殊符号有要求的网站，选中的符号可能不会全部出现）
+                                    <!--Special symbols checkbox-->
+                                    Optional special symbols (only for sites with specific requirements for special symbols, the selected symbols may not all be present).
                                     <div class="input-group mb-2 mt-2">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1"
@@ -193,40 +192,40 @@
                                         </div>
                                     </div>
 
-                                    以下为 Argon2 推荐加密参数，如无特殊需要请保持默认
-                                    <!--迭代次数-->
+                                    The following are the recommended encryption parameters for Argon2, please leave them as default if you do not need to adjust them.
+                                    <!--Iteration number-->
                                     <div class="input-group mb-2 mt-2">
                                         <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
                                             data-bs-trigger="focus" data-bs-placement="left"
-                                            data-bs-content="哈希运算的迭代次数，它必须是一个从 1 到 2^(32)-1 的整数值。若此处输入值小于1，将采用默认值计算">迭代次数</a>
+                                            data-bs-content="The number of iterations of the hash operation, which must be an integer value from 1 to 2^(32)-1. If the value entered here is less than 1, then the default value will be used to calculate">Iteration&nbsp;&nbsp;&nbsp;</a>
                                         <input type="number" class="form-control" id="iteration" placeholder="3"
                                             value="" min="1">
                                     </div>
 
-                                    <!--并行数量-->
+                                    <!--Degree of parallelism-->
                                     <div class="input-group mb-2">
                                         <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
                                             data-bs-trigger="focus" data-bs-placement="left"
-                                            data-bs-content="并行数量决定了可以运行多少个独立的但同步的计算链。它必须是一个从 1 到 2^(24)-1 的整数值。若此处输入值小于1，将采用默认值计算">并行数量</a>
+                                            data-bs-content="Degree of parallelism p determines how many independent (but synchronizing) computational chains (lanes) can be run.  It MUST be an integer value from 1 to 2^(24)-1. If the value entered here is less than 1, then the default value will be used to calculate">Parallelism</a>
                                         <input type="number" class="form-control" id="parallelism" placeholder="1"
                                             value="" min="1">
                                     </div>
 
-                                    <!--内存用量，单位KB-->
+                                    <!--Memory usage in KB-->
                                     <div class="input-group mb-2">
                                         <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
                                             data-bs-trigger="focus" data-bs-placement="left"
-                                            data-bs-content="内存大小必须是一个整数，取值范围为 8*并行数 到 2^(32)-1 KB。实际用量为输入值四舍五入到 4*并行数 的最近倍数。若此处输入值小于8*并行数，将采用默认值计算">内存用量</a>
+                                            data-bs-content="Memory size m MUST be an integer number of kibibytes from 8*p to 2^(32)-1.  The actual number of blocks is m', which is m rounded down to the nearest multiple of 4*p. If the value entered here is less than 8*p, then the default value will be used to calculate">Memory&nbsp;&nbsp;&nbsp;</a>
                                         <input type="number" class="form-control" id="memoryUsage" placeholder="65536"
                                             value="" min="8">
                                         <span class="input-group-text">KB</span>
                                     </div>
 
-                                    <!--输出散列长度-->
+                                    <!--Hash length/Tag length-->
                                     <div class="input-group">
                                         <a tabindex="0" class="btn btn-secondary" role="button" data-bs-toggle="popover"
                                             data-bs-trigger="focus" data-bs-placement="left"
-                                            data-bs-content="散列长度必须是一个从 4 到 2^(32)-1 的整数字节，需大于等于密码长度">散列长度</a>
+                                            data-bs-content="The tag length must be an integer from 4 to 2^(32)-1 bytes, and must be greater than or equal to the password length">Tag Length</a>
                                         <input type="number" class="form-control" id="hashLength" placeholder="64"
                                             value="" min="4">
                                         <span class="input-group-text">Byte</span>
@@ -239,37 +238,37 @@
 
                     <hr>
 
-                    <!--生成-->
+                    <!--Generate-->
                     <div class="form-group">
                         <div class="d-grid">
                             <button class="btn btn-lg btn-outline-warning" type="button" id="generatePwd">
-                                生成密码
+                                Generate
                             </button>
                         </div>
                     </div>
 
-                    <!-- 结果Modal弹窗 -->
+                    <!-- Result Modal -->
                     <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="resultModalLabel">生成结果</h5>
+                                    <h5 class="modal-title" id="resultModalLabel">Generated results</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
 
                                 <div class="modal-body">
-                                    <!--复制/评分-->
+                                    <!--Copy / Rate-->
                                     <div class="form-group">
                                         <div class="input-group mb-2">
                                             <input class="form-control" id="pwdOutput" type="password" readonly>
                                             <span class="input-group-text btn" onclick="showPwdOutput()"
-                                                id="showOrHidePwd" role="button">显示</span>
+                                                id="showOrHidePwd" role="button">Show</span>
                                         </div>
                                         <div class="progress">
                                             <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                                role="progressbar" id="qualityBar" aria-placeholder="密码强度评分"
+                                                role="progressbar" id="qualityBar" aria-placeholder="Password strength rating"
                                                 aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">bits</div>
                                         </div>
                                         <div class="d-flex justify-content-center mt-1">
@@ -282,11 +281,11 @@
 
                                 <div class="modal-footer">
                                     <button class="btn btn-outline-secondary" type="button" id="btnCopy">
-                                        复制
+                                        Copy
                                     </button>
                                     <button class="btn btn-outline-warning" type="button" id="btnCopyClose"
                                         data-bs-dismiss="modal">
-                                        复制并关闭
+                                        Copy & Close
                                     </button>
                                 </div>
                             </div>
@@ -301,16 +300,16 @@
     <script type="text/javascript" src="js/lib/clipboard.min.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="js/lib/PasswordQualityCalculator.min.js"></script>
-    <script type="text/javascript" src="js/main.min.js"></script>
+    <script type="text/javascript" src="js/en_main.min.js"></script>
 </body>
 
 <footer id="footer">
     <div class="container mt-5 mb-2">
         <div class="row justify-content-center">
             <div class="input-field col-12 col-sm-12 col-md-8 col-lg-6">
-                <span class="badge bg-secondary float-end"><a href="https://siriusq.top/">返回 siriusq.top</a></span>
-                <span class="badge bg-info"><a href="https://github.com/Siriusq/Fidelius">Github 开源</a></span>
-                <span class="badge bg-secondary"><a href="./en.html">English Version</a></span>
+                <span class="badge bg-secondary float-end"><a href="https://siriusq.top/">Back to siriusq.top</a></span>
+                <span class="badge bg-info"><a href="https://github.com/Siriusq/Fidelius">Open Source on Github</a></span>
+                <span class="badge bg-secondary"><a href="./index.html">简体中文</a></span>
             </div>
         </div>
     </div>

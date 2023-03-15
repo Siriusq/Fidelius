@@ -6,7 +6,8 @@
 Fidelius 是一款基于 [Argon2](https://en.wikipedia.org/wiki/Argon2) 加密算法的密码生成器。它以记忆密码为主密码P，以域名区分标识与生成时间为哈希盐S，将二者进行多次哈希运算迭代，再使用 [SeekPassword](https://github.com/Wsine/seekpassword) 的算法对结果进行进一步处理，最终得到用户需要的密码。
 
 ## 预览
-🔗[Live Demo](https://siriusq.top/Fidelius/)
+🔗[预览链接](https://siriusq.top/Fidelius/)
+🔗[English Documents](https://github.com/Siriusq/Fidelius/blob/master/README_en.md)
 
 ![](https://github.com/Siriusq/Fidelius/blob/master/preview.png)
 
