@@ -6,10 +6,10 @@
 Fidelius is a password generator based on the [Argon2](https://en.wikipedia.org/wiki/Argon2) cryptographic algorithm. It uses the memorised password as the main password P and the domain identifier and generation time as the hash salt S. The two are hashed several times and then the [SeekPassword](https://github.com/Wsine/seekpassword) algorithm is used to further process the outcome to obtain the password required by the user.
 
 ## Preview
-🔗[Live Demo](https://siriusq.top/Fidelius/)
+🔗[Live Demo](https://siriusq.top/Fidelius/en.html)
 🔗[简体中文文档](https://github.com/Siriusq/Fidelius/blob/master/README.md)
 
-![](https://github.com/Siriusq/Fidelius/blob/master/preview.png)
+![](https://github.com/Siriusq/Fidelius/blob/master/preview_en.png)
 
 ## Features
 - Based on the Argon2 algorithm, which won the Password Hashing Competition in 2015 and is effective against brute force cracking (including GPU-based brute force cracking).
