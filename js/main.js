@@ -40,6 +40,8 @@
 
 //点击按钮生成密码
 var argonWorker;
+var errorModal;
+var resModal;
 document.getElementById("generatePwd").onclick = function () {
     var memoryCodeEl = document.getElementById("memoryCode");
     var distinguishMarkEl = document.getElementById("distinguishMark");
@@ -92,10 +94,10 @@ document.getElementById("generatePwd").onclick = function () {
     document.getElementById("showOrHidePwd").innerText = "显示";
 
     //多线程运算Argon2，避免UI渲染被阻塞
-    if (!argonWorker){
+    if (!argonWorker) {
         argonWorker = new Worker('./js/fidelius.min.js');
     }
-    
+
     argonWorker.postMessage(
         [memoryCodeEl.value,
         distinguishMarkValue + generateTimeValue,
@@ -111,22 +113,30 @@ document.getElementById("generatePwd").onclick = function () {
 
     argonWorker.onmessage = function (event) {
         var res = event.data;
-        document.getElementById("pwdOutput").value = res;
-        pwdQualityCal(res);
-        copyPwdToClipboard(res);
+        if (res[0] == "Error!") {
+            //报错Modal弹窗
+            document.getElementById("errorOutput").value = res[1];
+            if (!errorModal) {
+                errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            }
+            errorModal.show();
+        } else {
+            document.getElementById("pwdOutput").value = res;
+            pwdQualityCal(res);
+            copyPwdToClipboard(res);
+            //结果Modal弹窗
+            if (!resModal) {
+                resModal = new bootstrap.Modal(document.getElementById('resultModal'));
+            }
+            resModal.show();
+        }
 
         //加载页面淡出
         loadingSpinner.style.opacity = 0;
         setTimeout(() => {
             loadingSpinner.style.display = "none";
         }, 300)
-
-        //结果Modal弹窗
-        var myModal = new bootstrap.Modal(document.getElementById('resultModal'));
-        myModal.show();
-
     };
-
 }
 
 //复制密码 https://clipboardjs.com/

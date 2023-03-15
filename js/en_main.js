@@ -40,6 +40,8 @@
 
 //Generate Button Click
 var argonWorker;
+var errorModal;
+var resModal;
 document.getElementById("generatePwd").onclick = function () {
     var memoryCodeEl = document.getElementById("memoryCode");
     var distinguishMarkEl = document.getElementById("distinguishMark");
@@ -92,10 +94,10 @@ document.getElementById("generatePwd").onclick = function () {
     document.getElementById("showOrHidePwd").innerText = "Show";
 
     //Multi-threaded computation of Argon2 to avoid blocking of UI rendering
-    if (!argonWorker){
+    if (!argonWorker) {
         argonWorker = new Worker('./js/fidelius.min.js');
     }
-    
+
     argonWorker.postMessage(
         [memoryCodeEl.value,
         distinguishMarkValue + generateTimeValue,
@@ -111,22 +113,30 @@ document.getElementById("generatePwd").onclick = function () {
 
     argonWorker.onmessage = function (event) {
         var res = event.data;
-        document.getElementById("pwdOutput").value = res;
-        pwdQualityCal(res);
-        copyPwdToClipboard(res);
+        if (res[0] == "Error!") {
+            //Error Modal
+            document.getElementById("errorOutput").value = res[1];
+            if (!errorModal) {
+                errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            }
+            errorModal.show();
+        } else {
+            document.getElementById("pwdOutput").value = res;
+            pwdQualityCal(res);
+            copyPwdToClipboard(res);
+            //Result Modal
+            if (!resModal) {
+                resModal = new bootstrap.Modal(document.getElementById('resultModal'));
+            }
+            resModal.show();
+        }
 
         //Loading page fade out
         loadingSpinner.style.opacity = 0;
         setTimeout(() => {
             loadingSpinner.style.display = "none";
         }, 300)
-
-        //Result Modal
-        var myModal = new bootstrap.Modal(document.getElementById('resultModal'));
-        myModal.show();
-
     };
-
 }
 
 //Copy password https://clipboardjs.com/

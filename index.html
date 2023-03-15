@@ -34,8 +34,7 @@
 
                 <!--弹窗-->
                 <div class="alert alert-warning" role="alert">
-                    说明：密码生成使用 <a href="https://en.wikipedia.org/wiki/Argon2">Argon2</a>
-                    算法，所有运算均在本地进行。点击每个输入框前的按钮可查看详细说明，点击按钮外任意区域可关闭说明。密码生成时间取决于设备性能，生成过程中网页可能会无响应，请耐心等待
+                    说明：密码生成使用 <a href="https://en.wikipedia.org/wiki/Argon2">Argon2</a> 算法，所有运算均在本地进行。点击每个输入框前的按钮可查看详细说明，点击按钮外任意区域可关闭说明。密码生成时间取决于设备性能，生成过程中网页可能会无响应，请耐心等待
                 </div>
 
                 <form>
@@ -288,6 +287,25 @@
                                         data-bs-dismiss="modal">
                                         复制并关闭
                                     </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 报错Modal弹窗 -->
+                    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="errorModalLabel">错误！</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="errorOutput" rows="6"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>

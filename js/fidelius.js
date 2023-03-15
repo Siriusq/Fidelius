@@ -36,7 +36,8 @@ onmessage = function (event) {
             this.postMessage(res);
         })
         .catch(e => {
-            console.log(JSON.stringify({ message: e.message, code: e.code }, null, 2));
+            var errorReport = JSON.stringify({ message: e.message, code: e.code }, null, 2);
+            this.postMessage(["Error!", errorReport])
         })
 
 
